@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ceylon Trails</string>
+    <string name="nav_explore">Explore</string>
+    <string name="nav_world">World</string>
+    <string name="nav_saved">Saved</string>
+    <string name="greeting">Ayubowan! 🙏</string>
+    <string name="explore_title">Where to next in Sri Lanka?</string>
+    <string name="search_places">Search places, beaches, temples…</string>
+    <string name="search_countries">Search countries or capitals</string>
+    <string name="in_season">In season</string>
+    <string name="all">All</string>
+    <string name="sort">Sort</string>
+    <string name="no_results">No places match these filters.</string>
+    <string name="clear_filters">Clear filters</string>
+    <string name="save">Save</string>
+    <string name="saved">Saved</string>
+    <string name="about">About</string>
+    <string name="read_more">Read more on Wikipedia</string>
+    <string name="highlights">Highlights</string>
+    <string name="best_time">Best time to visit</string>
+    <string name="weather_now">Weather right now</string>
+    <string name="directions">Directions</string>
+    <string name="share">Share</string>
+    <string name="retry">Try again</string>
+    <string name="loading">Loading…</string>
+    <string name="world_title">Explore the world</string>
+    <string name="world_subtitle">Capitals, currencies and languages for every country</string>
+    <string name="saved_title">Your saved places</string>
+    <string name="saved_empty">Tap the heart on any place or country to save it here.</string>
+    <string name="saved_places">Places in Sri Lanka</string>
+    <string name="saved_countries">Countries</string>
+    <string name="toggle_favorite">Save to favourites</string>
+    <string name="back">Back</string>
+    <string name="season_note">Typical seasons from the monsoon pattern; weather can vary.</string>
+    <string name="data_credit">Text and photos: Wikipedia (CC BY-SA). Weather: Open-Meteo. Countries: REST Countries.</string>
+    <string name="season_banner_title">%1$d places are at their best in %2$s</string>
+    <plurals name="places">
+        <item quantity="one">%d place</item>
+        <item quantity="other">%d places</item>
+    </plurals>
+    <plurals name="countries">
+        <item quantity="one">%d country</item>
+        <item quantity="other">%d countries</item>
+    </plurals>
+</resources>

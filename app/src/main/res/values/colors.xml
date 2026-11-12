@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="teal">#0B7A6B</color>
+    <color name="teal_dark">#075E52</color>
+    <color name="teal_soft">#DDF2EE</color>
+    <color name="saffron">#F2A23A</color>
+    <color name="saffron_soft">#FFF1DC</color>
+    <color name="coral">#E8573F</color>
+    <color name="bg">#F8F7F3</color>
+    <color name="card">#FFFFFF</color>
+    <color name="ink">#1B1D1F</color>
+    <color name="muted">#6B7178</color>
+    <color name="line">#E7E5DF</color>
+    <color name="green">#1E8E3E</color>
+    <color name="green_soft">#E3F4E7</color>
+    <color name="chip_bg">#FFFFFF</color>
+</resources>

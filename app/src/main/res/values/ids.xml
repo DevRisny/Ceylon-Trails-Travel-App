@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- which destination an ImageView is showing (Glide uses the plain view tag itself) -->
+    <item name="photo_for" type="id" />
+</resources>
