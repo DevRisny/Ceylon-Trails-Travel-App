@@ -6,7 +6,6 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
-import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -34,15 +33,15 @@ class ScreenshotTest {
         c.getSharedPreferences("favorites", Context.MODE_PRIVATE).edit().putString("keys", "dest:ella|dest:galle|dest:sigiriya|country:JP|country:LK").commit()
         ActivityScenario.launch(MainActivity::class.java).use {
             capture("1_explore", 5000)
-            onView(allOf(withId(R.id.list), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+            onView(allOf(withId(R.id.list), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, tap()))
             capture("2_destination", 5000)
             pressBack()
-            onView(withId(R.id.nav_world)).perform(click())
+            onView(withId(R.id.nav_world)).perform(tap())
             capture("3_world", 6000)
-            onView(allOf(withId(R.id.list), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+            onView(allOf(withId(R.id.list), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, tap()))
             capture("4_country", 4000)
             pressBack()
-            onView(withId(R.id.nav_saved)).perform(click())
+            onView(withId(R.id.nav_saved)).perform(tap())
             capture("5_saved", 4000)
         }
     }

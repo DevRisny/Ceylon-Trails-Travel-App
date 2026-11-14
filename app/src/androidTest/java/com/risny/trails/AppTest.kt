@@ -8,11 +8,11 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.ViewAssertion
-import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
 import androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -51,7 +51,7 @@ class AppTest {
 
     @Test fun categoryChipFiltersTheList() {
         ActivityScenario.launch(MainActivity::class.java).use {
-            onView(withText("${Category.WILDLIFE.emoji} ${Category.WILDLIFE.label}")).perform(click())
+            onView(withText("${Category.WILDLIFE.emoji} ${Category.WILDLIFE.label}")).perform(tap())
             val wildlife = Destinations.ALL.count { Category.WILDLIFE in it.categories }
             onView(allOf(withId(R.id.list), isDisplayed())).check(itemCount({ it == wildlife }, "wildlife"))
         }
@@ -61,7 +61,7 @@ class AppTest {
         ActivityScenario.launch(MainActivity::class.java).use {
             onView(allOf(withId(R.id.search), isDisplayed())).perform(typeText("xyzzy"), closeSoftKeyboard())
             onView(allOf(withId(R.id.empty), isDisplayed())).check(matches(isDisplayed()))
-            onView(withId(R.id.clear)).perform(click())
+            onView(withId(R.id.clear)).perform(tap())
             onView(allOf(withId(R.id.list), isDisplayed())).check(itemCount({ it == Destinations.ALL.size }, "after clear"))
         }
     }
@@ -69,7 +69,7 @@ class AppTest {
     @Test fun openingADestinationShowsItsDetails() {
         ActivityScenario.launch(MainActivity::class.java).use {
             onView(allOf(withId(R.id.search), isDisplayed())).perform(typeText("nine arch"), closeSoftKeyboard())
-            onView(allOf(withId(R.id.list), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+            onView(allOf(withId(R.id.list), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, tap()))
             onView(withText(Destinations.byId("ella")!!.tagline)).check(matches(isDisplayed()))
         }
     }
@@ -77,10 +77,12 @@ class AppTest {
     @Test fun savingAPlaceShowsItInSaved() {
         ActivityScenario.launch(MainActivity::class.java).use { scenario ->
             onView(allOf(withId(R.id.search), isDisplayed())).perform(typeText("sigiriya"), closeSoftKeyboard())
-            onView(allOf(withId(R.id.favorite), isDisplayed())).perform(click())
+            // "sigiriya" also matches Minneriya (its highlights mention Sigiriya), so pick the Sigiriya card itself
+            onView(allOf(withId(R.id.list), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItem<RecyclerView.ViewHolder>(hasDescendant(withText("Sigiriya")), tapChild(R.id.favorite)))
             val app = ApplicationProvider.getApplicationContext<TrailsApp>()
             assertEquals(setOf("dest:sigiriya"), app.favorites.favorites.value.keys)
-            onView(withId(R.id.nav_saved)).perform(click())
+            onView(withId(R.id.nav_saved)).perform(tap())
             onView(allOf(withId(R.id.places), isDisplayed())).check(itemCount({ it == 1 }, "saved places"))
             scenario.onActivity { }
         }
