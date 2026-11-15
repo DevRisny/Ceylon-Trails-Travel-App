@@ -28,6 +28,19 @@ class ScreenshotTest {
         android.os.ParcelFileDescriptor.AutoCloseInputStream(pfd).use { it.readBytes() }
     }
 
+    private fun openFirstCountry(): Boolean {
+        repeat(10) {
+            try {
+                onView(allOf(withId(R.id.list), isDisplayed()))
+                    .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, tap()))
+                return true
+            } catch (e: Exception) {
+                Thread.sleep(1500)
+            }
+        }
+        return false
+    }
+
     @Test fun captureMainScreens() {
         val c: Context = ApplicationProvider.getApplicationContext()
         c.getSharedPreferences("favorites", Context.MODE_PRIVATE).edit().putString("keys", "dest:ella|dest:galle|dest:sigiriya|country:JP|country:LK").commit()
@@ -38,9 +51,12 @@ class ScreenshotTest {
             pressBack()
             onView(withId(R.id.nav_world)).perform(tap())
             capture("3_world", 6000)
-            onView(allOf(withId(R.id.list), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, tap()))
-            capture("4_country", 4000)
-            pressBack()
+            // The world list comes from the live REST Countries API; on a slow CI network it may
+            // still be loading, so try for a while and skip this one screenshot rather than fail.
+            if (openFirstCountry()) {
+                capture("4_country", 4000)
+                pressBack()
+            }
             onView(withId(R.id.nav_saved)).perform(tap())
             capture("5_saved", 4000)
         }

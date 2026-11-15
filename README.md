@@ -5,6 +5,10 @@ An Android travel guide to **Sri Lanka**, plus a quick reference for **every cou
 > Pynexia Tech · Android Development Internship · **Week 3: Travel App**
 > Built by **Junaideen Risny Suha** · Kotlin · XML layouts · Material 3 · MVVM
 
+### ⬇️ [Download the APK](https://github.com/DevRisny/Ceylon-Trails-Travel-App/releases/latest)
+
+Open it on an Android phone (7.0+) and allow "Install unknown apps" when asked.
+
 ## Features
 
 | | |
